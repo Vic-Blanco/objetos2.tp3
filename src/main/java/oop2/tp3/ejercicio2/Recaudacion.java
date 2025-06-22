@@ -10,63 +10,36 @@ import java.util.List;
 import java.util.Map;
 
 public class Recaudacion {
-    public static List<Map<String, String>> where(Map<String, String> options)
+    private Map<String, String> options;
+
+    public Recaudacion(Map<String, String> options ){
+        this.options= options;
+    }
+    public List<Map<String, String>> metodo()
             throws IOException {
-        List<String[]> csvData = new ArrayList<String[]>();
-        CSVReader reader = new CSVReader(new FileReader("src/main/resources/data.csv"));
-        String[] row = null;
 
-        while ((row = reader.readNext()) != null) {
-            csvData.add(row);
-        }
-
-        reader.close();
-        csvData.remove(0);
+        List<String[]> csvData = LibroRecaudacion.leerCsv();
 
         if (options.containsKey("company_name")) {
-            List<String[]> results = new ArrayList<String[]>();
-
-            for (int i = 0; i < csvData.size(); i++) {
-                if (csvData.get(i)[1].equals(options.get("company_name"))) {
-                    results.add(csvData.get(i));
-                }
-            }
-            csvData = results;
+            csvData = getRow(csvData, 1, options, "company_name");
         }
 
         if (options.containsKey("city")) {
-            List<String[]> results = new ArrayList<String[]>();
-
-            for (int i = 0; i < csvData.size(); i++) {
-                if (csvData.get(i)[4].equals(options.get("city"))) {
-                    results.add(csvData.get(i));
-                }
-            }
-            csvData = results;
+            csvData = getRow(csvData, 4, options, "city");
         }
 
         if (options.containsKey("state")) {
-            List<String[]> results = new ArrayList<String[]>();
-
-            for (int i = 0; i < csvData.size(); i++) {
-                if (csvData.get(i)[5].equals(options.get("state"))) {
-                    results.add(csvData.get(i));
-                }
-            }
-            csvData = results;
+            csvData = getRow(csvData, 5, options, "state");
         }
 
         if (options.containsKey("round")) {
-            List<String[]> results = new ArrayList<String[]>();
-
-            for (int i = 0; i < csvData.size(); i++) {
-                if (csvData.get(i)[9].equals(options.get("round"))) {
-                    results.add(csvData.get(i));
-                }
-            }
-            csvData = results;
+            csvData = getRow(csvData, 9, options, "round");
         }
 
+        return toMapList(csvData);
+    }
+
+    private List<Map<String, String>> toMapList(List<String[]> csvData) {
         List<Map<String, String>> output = new ArrayList<Map<String, String>>();
 
         for (int i = 0; i < csvData.size(); i++) {
@@ -84,5 +57,16 @@ public class Recaudacion {
             output.add(mapped);
         }
         return output;
+    }
+
+    private List<String[]> getRow(List<String[]> csvData, int x, Map<String, String> options, String company_name) {
+        List<String[]> results = new ArrayList<String[]>();
+        for (int i = 0; i < csvData.size(); i++) {
+            if (csvData.get(i)[x].equals(options.get(company_name))) {
+                results.add(csvData.get(i));
+            }
+        }
+        csvData = results;
+        return csvData;
     }
 }

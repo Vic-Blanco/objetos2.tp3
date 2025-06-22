@@ -12,29 +12,29 @@ public class Cliente {
         this.name = nombre;
     }
 
-    public double calcularDeuda(){
+    public double calcularDeuda() {
         if (alquileres.isEmpty()) {
             return 0;
         }
         return alquileres.stream().mapToDouble(Alquiler::calcularMonto).sum();
     }
 
-    public int calcularPuntosObtenidos(){
+    public int calcularPuntosObtenidos() {
         return puntosAlquilerFrecuente;
     }
 
-    public void alquilar(Libro Libro, int diasAlquilados) {
-        CopiaLibro copiaLibro = new CopiaLibro(Libro);
+    public void alquilar(CopiaLibro copiaLibro, int diasAlquilados) {
+
         Alquiler rental = new Alquiler(copiaLibro, diasAlquilados);
         alquileres.add(rental);
         puntosAlquilerFrecuente++;
-        sumarPuntosPorAlquilarNuevoLanzamiento(copiaLibro, diasAlquilados);
+//        sumarPuntosPorAlquilarNuevoLanzamiento(copiaLibro, diasAlquilados);
 
     }
 
-    private void sumarPuntosPorAlquilarNuevoLanzamiento(CopiaLibro copiaLibro, int diasAlquilados) {
-        if ((copiaLibro.esLibroNuevoLanzamiento()) && (diasAlquilados > 1)) {
-            puntosAlquilerFrecuente++;
-        }
-    }
+//    private void sumarPuntosPorAlquilarNuevoLanzamiento(CopiaLibro copiaLibro, int diasAlquilados) {
+//        if ((copiaLibro.esLibroNuevoLanzamiento()) && (diasAlquilados > 1)) {
+//            puntosAlquilerFrecuente++;
+//        }
+//    }
 }

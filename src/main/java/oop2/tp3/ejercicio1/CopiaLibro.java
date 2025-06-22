@@ -4,15 +4,19 @@ public class CopiaLibro {
     private Libro copia;
 
     public CopiaLibro(Libro libro) {
-        this.copia= libro;
+        this.copia = libro;
     }
-    public boolean esLibroInfantil() {
-        return this.copia.esLibroInfantil();
+
+    public double calcularMonto(int diasAlquilados) {
+        return this.copia.calcularMonto(diasAlquilados);
     }
-    public boolean esLibroNuevoLanzamiento() {
-        return this.copia.esLibroNuevoLanzamiento();
-    }
-    public boolean esLibroRegular() {
-        return this.copia.esLibroRegular();
-    }
+//    public boolean esLibroInfantil() {
+//        return this.copia.esLibroInfantil();
+//    }
+//    public boolean esLibroNuevoLanzamiento() {
+//        return this.copia.esLibroNuevoLanzamiento();
+//    }
+//    public boolean esLibroRegular() {
+//        return this.copia.esLibroRegular();
+//    }
 }

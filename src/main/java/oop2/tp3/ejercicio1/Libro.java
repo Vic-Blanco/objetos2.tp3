@@ -1,26 +1,33 @@
 package oop2.tp3.ejercicio1;
 
 public class Libro {
-    public static final int INFANTILES = 2;
-    public static final int REGULARES = 0;
-    public static final int NUEVO_LANZAMIENTO = 1;
+    //    public static final int INFANTILES = 2;
+//    public static final int REGULARES = 0;
+//    public static final int NUEVO_LANZAMIENTO = 1;
     private String nombre;
-    private int codigoPrecio;
+    //    private int codigoPrecio;
+    private Categoria categoria;
 
-    public Libro(String nombre, int priceCode) {
+    public Libro(String nombre, Categoria categoria) {
         this.nombre = nombre;
-        this.codigoPrecio = priceCode;
+        this.categoria = categoria;
+//        this.codigoPrecio = priceCode;
     }
 
-    public boolean esLibroInfantil() {
-        return this.codigoPrecio == INFANTILES;
+    public double calcularMonto(int diasAlquilados) {
+        return this.categoria.calcularMonto(diasAlquilados);
     }
-    public boolean esLibroNuevoLanzamiento() {
-        return this.codigoPrecio == NUEVO_LANZAMIENTO;
-    }
-    public boolean esLibroRegular() {
-        return this.codigoPrecio == REGULARES;
-    }
+
+
+//    public boolean esLibroInfantil() {
+//        return this.codigoPrecio == INFANTILES;
+//    }
+//    public boolean esLibroNuevoLanzamiento() {
+//        return this.codigoPrecio == NUEVO_LANZAMIENTO;
+//    }
+//    public boolean esLibroRegular() {
+//        return this.codigoPrecio == REGULARES;
+//    }
 
 
 }
